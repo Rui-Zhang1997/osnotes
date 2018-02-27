@@ -303,3 +303,7 @@ Memory Management
             been allocated. Does not need large contiguuous chunk of physical memory
         -Inverted PT: Saves lot of space, requires chunk of memory in proportion to size of physical addr space.
             Translation is done through hash table.
+            - Implementation decreases memory needed to store PT but also slower access time, therefore searching is not
+                used
+            - Can use hash table to reduce look up. Under hashing, each PT also includes a frame number and a chain pointer
+            

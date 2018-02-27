@@ -82,6 +82,18 @@ Processes and Threads
         - Blocked queue per device to hold TCBs of threads blocked waiting for I/O on device to complete
         - When thread is switched out at timer interrupt, it is still ready to run so TCB stays on the run queue
         - When thread is switched out because it is blocking in I/O, TCB is moved to the blocked queue of the device
+
+        SWITCHING CODE PATHWAY
+            user thread executing -> clock interrupt -> PC modified by hardware to "vector" to interrrupt handler ->
+            user thread state is saved for restart -> clock interrupt handler is invoked -> disable interrupt checking ->
+            check whether current thread has run "long enough" -> if yes,m post asynchronous software trap (AST) ->
+            enable interrupt checking -> exit clock interrupt handler -> enter "return to user" code -> check whether AST was posted ->
+            if not, restore user thread state and return 4to executing user thread; if AST was posted, call context switch code
+
+        ALTERNATIVE
+            user thread executing -> system call to perform I/O -> PC modified by hardware to "vector" to trap handler ->
+            user thread state saved for restart -> OS code to perform system call is invoked -> disable interrupt checking ->
+            I/O operation started (by invoking I/O driver) -> set thread status ->
 Synchronization
 
 CPU Scheduling

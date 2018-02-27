@@ -1,0 +1,156 @@
+Caching
+
+Invoking the OS
+
+I/O event notification
+
+Send/receive data to I/O devices
+
+Processes and Threads
+    - Each process can have multiple threads
+    - Each thread has a private stack
+        - Registers are also private
+    - All threads share code, globals, and heap
+        - Objects shared across multiple threads should be in the heap or globals
+    DIAGRAM 1
+
+    SINGLE-THREADED ADDR SPACE
+
+    +-----------------+
+    |       OS        |
+    +-----------------+
+    |      Code       |
+    +-----------------+
+    |     Globals     |
+    +-----------------+
+    |                 |
+    |     Stack       |
+    |                 |
+    +-----------------+
+    |                 |
+    +-----------------+
+    |      Heap       |
+    +-----------------+
+
+    MULTI-THREADED ADDR SPACE
+
+    +-----------------+
+    |       OS        |
+    +-----------------+
+    |      Code       |
+    +-----------------+
+    |     Globals     |
+    +-----------------+
+    |     Stack       |
+    +-----------------+
+    |     Stack       |
+    +-----------------+
+    |     Stack       |
+    +-----------------+
+    |                 |
+    +-----------------+
+    |      Heap       |
+    +-----------------+
+
+    - Each thread described by a thread-control block (TCB)
+        - Contains
+            - Thread ID
+            - Space for saving registers
+            - Thread-specific info (e.g. signal mask, scheduling priority)
+    - Although model is each thread ahs private stack, threads actually share process addr space (NO MEMORY PROTECTION)
+    - Threads could potentially write into each other's stacks
+
+    RUNNING ON A SINGLE CORE NON-MULTITHREADED CPU wtf to do?
+        - We multiplex multiple threads on the core
+        - Only one thread runs at one time
+        - OS may decide to stop currently running thread and allow another to run (called context-switching)
+   
+    CONTEXT SWITCHING
+        - Copy all live registers to TCB
+            - For register-only machines, need at least 1 scratch register
+                - points to area of memory in TCB that registers should be saved to
+        - Restore state of thread to run next
+            - Copy values of live registers from TCB to registers
+        - When does context switching take place?
+            - When OS decides a thread has run long enough 
+            - When thread is performing I/O
+            - To wait for some other thread
+        - At entry to context switch, return addr is either in a register or on the stack (in current activation record)
+        - CS saves this return addr to the TCB instead of current PC
+        - To thread, it looks like CS just took a while to return
+        - Run queue that points to TCB of threads ready to run
+        - Blocked queue per device to hold TCBs of threads blocked waiting for I/O on device to complete
+        - When thread is switched out at timer interrupt, it is still ready to run so TCB stays on the run queue
+        - When thread is switched out because it is blocking in I/O, TCB is moved to the blocked queue of the device
+Synchronization
+
+CPU Scheduling
+    - Employs policies to determine scheduling (scheduling policies)
+    - Preempting: Interrupting a job so that another can run
+    - T_turnaround = T_completion - T_arrival (Metric to measure the time between job entering the queue and its completion)
+    - T_response = T_firstrun - T_arrival (Metric to measure the time it takes between when it was submitted to when it is first run)
+    FIFO - First In, First Out : First Come, First Served (FCFS)
+        - Whatever job comes first gets run
+        - PRO: Easy to implement
+        - CON: Bad turnaround time, since a task that requires a long time to finish will hog the CPU,
+                resulting in bad turnaround time (convoy effect: relatively short potential consumers gets
+                queued behind a heavyweight)
+    SJF - Shortest Job First
+        - Runs the shortest job first
+        - PRO: Good turn around time
+        _ CON: Jobs do not all arrive together and a task that takes a long time to finish may arrive before
+                shorter jobs and thus will lock out the shorter jobs. 
+    STCF - Shortest Time-to-Completion First
+        - The job that takes the shortest amount of time to finish is run first
+        - Anytime a new job enters the system, the STCF scheduler determines which of the remaining jobs has the least time left,
+            and schedules that one
+        - STCF not really good for response time as the third job has to wait for the previous two jobs to run completely before
+            being scheduled
+        - PRO: Much better turnaround time
+        - CON: Bad response time
+    RR - Round Robin
+        - Instead of running jobs to completion, RR runs a job for a time slice (or quantum), preempts it, and goes to the next task.
+            Repeats until all jobs are finished
+        - Length of time slice is critical for RR. Shorter time slices the better response time but too short and the cost of
+            context-switching between jobs degrades performance. Length of time too long and we see the same problem as FIFO.
+            Deciding on the time slice length presents a trade-off: making it long enough to amortize cost of switching without
+            making it so long that the system is not responsive
+        - RR is one of the worst policies if turnaround is our metric since it stretches one job as long as it can by running it
+            in short time slices
+        - Any policy that is fair (evenly divides the CPU amongst active processes on a small time scale) will perform poorly on metrics
+            such as turnaround
+        - SJF & STCF: Good turnaround, bad response time. RR: Good response time, bad turnaround
+
+    - All programs perform I/O
+    - OS must decide what to do about a process perfomring I/O as it is not actively using the CPU when it is doing I/O
+        - Blocked until the I/O is done
+    
+    MLFQ - Multi-Level Feedback Queue
+        - Wants to optimize turnaround time by running shortest jobs first but the OS does not generally know how long a job will run
+            for. Wants to make a system feel responsive to ineractive users but that would result in bad turnaround time.
+        - MLFQ has a number of distinct queues with each assigned a different priority level. A job is on one of these queues at one
+            time only. Whenever a job needs to be run, the job with the highest priority (one in a higher queue) is chosen to run
+        - Key to MLFQ is how scheduler sets priorities
+        - Varies the priority on a job based on the job's observed behavior
+            - If a job repeatedly relinquishes the CPU for keyboard input, MLFQ keeps its priority high so it will be more responsive
+            - If a job uses the CPU intensively and does not constantly relinquish the CPU, it is set at a lower priority
+            - Tries to learn about the history of the job to predict its future behavior
+        - Mix of interactive and long-running "CPU-bound" jobs
+        - When a job enters the system, it is placed at highest priority
+        - If a job uses up an entire quantum, its priority is lowered
+        - If a job gives up the CPU before time slice is up, it stays at the same priority level
+        ISSUES
+            - Too many interactive jobs will consume all CPU time, and thus long-running jobs will never receive any CPU time (starvation)
+            - A smart user could rewrite their program to issue an IO operation and relinquish CPU and allow it to remain in the highest
+                priority level and can nearly monopolize the CPU
+
+        PRIORITY BOOST
+            - Periodically boost priority of all jobs in the system
+                - After some time period S, move all jobs to highest priority queue
+
+        BETTER ACCOUNTING
+            - Keeping track of the total amount of time slices that a job uses in a given queue, and when it uses up all of its time slices,
+                it is moved to a lower priority queue
+    MULTIPROCESSOR SCHEDULING
+
+Memory Management

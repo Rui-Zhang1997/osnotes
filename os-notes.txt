@@ -24,7 +24,7 @@ Processes and Threads
     |     Globals     |
     +-----------------+
     |                 |
-    |     Stack       |
+    |      Stack      |
     |                 |
     +-----------------+
     |                 |
@@ -37,17 +37,17 @@ Processes and Threads
     +-----------------+
     |       OS        |
     +-----------------+
-    |      Code       |
+    |       Code      |
     +-----------------+
     |     Globals     |
     +-----------------+
-    |     Stack       |
+    |      Stack      |
     +-----------------+
-    |     Stack       |
+    |      Stack      |
     +-----------------+
-    |     Stack       |
+    |      Stack      |
     +-----------------+
-    |                 |
+    |      Stack      |
     +-----------------+
     |      Heap       |
     +-----------------+
@@ -93,7 +93,54 @@ Processes and Threads
         ALTERNATIVE
             user thread executing -> system call to perform I/O -> PC modified by hardware to "vector" to trap handler ->
             user thread state saved for restart -> OS code to perform system call is invoked -> disable interrupt checking ->
-            I/O operation started (by invoking I/O driver) -> set thread status ->
+            I/O operation started (by invoking I/O driver) -> set thread status to waiting -> move thread's TCB from run queue to wait
+            queue associates with specific device -> enable interrupt checking -> exit trap handler -> call context switching code
+
+        - At entry to CS, return addr is either in register or on the stack (in the current activation record). CS saves return addr to TCB
+        instead of current PC
+        - A run queue points to TCBs of threads ready to run
+        - Blocked queue per device to holdw TCBs of threads blocked waiting for an I/O operation on that device
+        - When thread is switched out at timer interrupt it is still ready to run so its TCB stays on the run queue
+        - When a thread is switched out b/c it is blocking on I/O, TCB is moved to blocked queue of that device
+        
+        SWITCHING TO THREAD OF DIFF. PROCESS
+        - Caches:
+            Physical addresses: no issue
+            Virtual addrs: cache must either have process tag or must flush cache on CS
+        - TLB
+            Each entry must have process tag or must flush TLB on CS
+        - Page Table
+            Typically have page table pointer (register) that must be reloaded on CS
+        
+        What happens if kernel wants to signal a process when all of its threads are locked?
+        When there are multiple threads, which thread should the kernel deliver the signal to?
+            - OS writes into PCB that signal should be deliviered
+            - Next time thread from process is allowed to run, signal is delivered to that thread as part of the CS
+        What happens if kernel needs to deliver multiple signals?
+        
+        Kernel-level threads
+            Sees multiple execution contexts
+            Thread management done by kernel
+        User-level threads
+            Implemented a sa thread library
+            Kernel sees one execution context and is unaware of thread activity
+            Can be preemptive or not
+
+        Advantages of ULT
+            Performance: low-cost thread operations
+            Flexibility: scheduling can be application specific
+            Portability: user-level thread library easy to port
+        Disadvantages:
+            If a user-level thread blocks in kernel entire process is blocked
+            Cannot take advantage of multiprocessing (kernel assigns one process to only one processor)
+        LWP (Lightweight processes)
+            Create extra layer between user and kernel threads
+            LWP runs in user-space on top of kernel-level thread; multiple user-level threads can be created on top of each LWP
+            LWPs of same process share data
+        Process ~= Thread (Linux only)
+            Schedulable entities are processes
+            A process can be seen as a single thread, but a process can contain multiple threads that share code & data
+            In pthreads library (NPTL), for linux, each thread created corresponds to kernel schedulable entity
 Synchronization
 
 CPU Scheduling

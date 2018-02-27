@@ -213,3 +213,93 @@ CPU Scheduling
     MULTIPROCESSOR SCHEDULING
 
 Memory Management
+    Registers - extremely fast and extremely tiny (a single byte)
+    Cache - Very fast, tiny compared to main memory (KB to MB), <50 cycles
+    Memory - Slow, lots of space (GB), hundreds of cycles (200-400 cycles)
+    VMEM
+
+    Capacity Miss
+    Conflict Miss
+    Cold miss
+
+    CACHE
+        - Acts as attraction memory, storing values of RAM that were recently access (temporal locality)
+        - Transfer between RAM and cache peerformed in cache blocks/lines
+        - Mapping btwn caches and RAM is (mostly) staticc (fast handling of cache misses)
+        - Often L1 I-cache is separate from D-cache
+
+    PAGES
+        - Cacheable unit of virtual memory
+        - OS controls mapping btwn pages of VM and RAM
+    - Hardware sees shared physical memory while software sees a private virtual addr space
+    - Mem Mgmt in OS coordinates these two views
+        - Consistency: all addr spaces should look "basically the same"
+        - Relocation: processes can be loaded at any physical addr
+        - Protection: a process cannot maliciously access memory belonging to another proc
+        - Sharing: allow sharing of physical memory
+
+    MEM. ALLOCATION
+        - First-fit: allocate first big enough hole
+        - Best-fit: allocate the smallest hole that is big enough. Produces smallest leftover hole.
+        - Worst-fit: Allocate the largest hole. Produces biggest leftover hole.
+        - First-fit and best-fit better than worst-fit in speed and storage utilization
+
+    FRAGMENTATION
+        - Entire processes are laoded into memory, lots of unused space, but too small for new jobs
+        - Idea: Break processes into small, fixed-sized chunks (pages), so that processes don't have to exist contiguously
+        - Segmentation: same idea but variable-sized chunks
+
+    VIRTUAL MEMORY
+        - Gives illusion that the addr is contiguous and may be larger than physical addr space
+        - VM can be implemented using either paging or segmentation but paging is presently most common
+        - VM is motivated by both
+            - Convenience
+            - Programmer does not ahve to deal with machines that have diff amount of physical memory
+        - Translation from virtual to physical can be done in software but w/o protection
+        - Hardware support is needed for protection & performance
+            - Simplest solution with two registers: base and size
+        
+    SEGMENTATION
+        - Segments are variable size
+        - Transation done through set of (base, size, state) tuples - segment table indexed by seg. num.
+        - State: valid/invalid, access permission, reference, modified bits
+        - Segments may be visible to the programmer and can be used as a convenience for organizing
+            the programs and data (code, segment, global data segment)
+    
+    PAGING
+        - Pages are of fixed size
+        - Physical memory correspond to a page is called a page frame
+        - Translation done through a page table indexed by page number
+        - Each entry in page table contains frame number that the vpage is mapped to and the state
+            of the page in memory
+        - State: valid/invalid, access permission, reference, modified, caching bits
+        - Paging is transparent to the programmer
+    
+    COMBINED SEG and PAGING
+        - Some MMUs combine paging w/ segmentation
+        - VAddr: segment number + page number + offset
+        - Segmentation translation is performed first
+        - Segment entry points to a page table for that segment
+        - Page no. portion of vaddr is used to index page table and look up cooresponding page frame no.
+    
+    TLB - TRANSLATION LOOKASIDE BUFFER
+        - Translation on every mem. access must be fast
+        - Cache for page table entries is called TLB
+        - Traditionally, fully associative and single-level but are becoming set-associative and multi-level
+        - Relatively small no. of entires
+        - TLB entry contains page number and corresponding PT entry
+        - On each mem. access, we look for page -> frame mapping in the TLB 
+        - TLB Miss: TLB does not contain right PT entry
+            - Evict existing entry if does not have any free ones
+                - Pseudo-LRU common today: one bit represents each internal node of BST; cache lines are leaves;
+                    access sets the bits to the other direction in the tree
+            - Can be handled in hardware (CISC, x86) or in software (RISC, MIPS)
+        - Vaddr space may be larger than physical memory
+        - Stored on next advice down in memory hireacrhy
+
+    PAGE TABLE STRUCTURE
+        - Linear page tables can become huge
+        - Sol. Two level PT: page the PT, Saves space by longly allocating 2nd level tabes for vmem that has actual
+            been allocated. Does not need large contiguuous chunk of physical memory
+        -Inverted PT: Saves lot of space, requires chunk of memory in proportion to size of physical addr space.
+            Translation is done through hash table.

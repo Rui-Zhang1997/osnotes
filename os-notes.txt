@@ -2,6 +2,13 @@ Definitional
 Functional
 Mastery
 
+WORDS?!
+--------------------------
+Signal mask
+Banker's algorithm
+Tree/Spin Barriers
+
+--------------------------
 Caching
 
 Invoking the OS
@@ -155,7 +162,43 @@ Processes and Threads
             Schedulable entities are processes
             A process can be seen as a single thread, but a process can contain multiple threads that share code & data
             In pthreads library (NPTL), for linux, each thread created corresponds to kernel schedulable entity
+
 Synchronization
+    LOCKS
+        - No assumptions on hardware
+        - Mutual exclusion in maintained - only one thread can be executed inside a CS
+        - Execution takes finite time
+        - Thrd not in CS cannot prevent other threads from entering CS
+        - Entering CS cannot be delayed indefinitely: no deadlock or starvation
+        - Implementing locks at user-level  
+            - Expensive to enter the kernel
+            - Can't disable interrupts
+            - Atomic read-modify-write instructions
+                - Test and set
+                    Atomically read variable and, if value of var is 0, set to 1
+                - Fetch and increment
+                    - Atomically return current val of mem location and incremeent val by 1
+                - Compare and swap
+                    - Atomically compare value of mem location w old value and if same replace w/ new value
+                - Modern architectures perform atomic operations in the cache
+        - Spin barriers
+
+    CONDITION VARIABLES
+        - Always associated w/ a condition and a lock
+        - Used to wait for condition to take on a given value
+        Wait(Lock lock)
+            Release the lock
+            Put thread object on wait queue of this CondVar Object
+            Yield CPU to another thread
+            When waken by system, reacquire lock and run
+        Signal()
+            If at least 1 thrd is sleeping on cond_var, wake 1 up. Otherwise, no effect
+            Waking up a thrd means changing state to Ready and moving thrd object to run queue
+        Broadcast()
+            If 1 or more thrds are sleeping on cond_var, wake everyone up
+            Otherwise, no effect
+
+    SEMAPHORES
 
 CPU Scheduling
     - Employs policies to determine scheduling (scheduling policies)
@@ -338,4 +381,43 @@ Memory Management
         - if VM <= physical memory, no problem
         - if VM > physical memory, part is stored in memory, part is stored on disk
 
-            
+        - Start process load code page where the process will be executing
+        - As process references memory outside loaded page, bring in as necessary
+        - How to represent fact that a page of VM is not in memory?
+    PAGE FAULT
+        - Page fault exception
+            - Check the reference is valid and load the desired page from disk. Update page table entry to point to new frame,
+                change valid bit of the page to v. Restart instruction that was interrupted
+            - If no free frames
+                - Free a frame currently being used
+                - Select frame to be replaced
+                - Change page table to reflect that victim is invalid
+                - Read the desired page into the newly freed frame
+                - Change the PT: new page is in the freed frame and now is valid
+                - Restart faulting instruction
+                - Optimization: Do not need to write victim back if it has not been modified (need dirty bit per page)
+                - Motivated to find a good replacement policy
+                    - Is there an optimal replacement algorithm?
+                        - FIFO
+                            - Each page lives in memory for about the same time
+                        - LRU
+                            - On page access, timestamp it
+                            - When evicting, choose one with oldest timestamp
+                            - Quite good for most programs
+                        - NFUR - Not Frequently Used Replacement
+                            - Have reference and counter for each page frame
+                            - At each clock interrupt, OS adds the reference bit of each frame to its counter and clears ref bit
+                            - When need to evict page, select frame with lowest counter value
+                            - Will not evict a page used a lot in the past but is no longer accessed
+                        - Clock (2nd chance)
+                        - Nth-chance
+
+        MULTIPROCESSOR SUPPORT
+            - More than one addr space can be loaded to memory
+            - CPU updaes register when context switching btwn threads from diff processes
+            - Most TLBs can be cached more than one PT
+                - Store pid to distinguish btwn virtual addrs belonging to diff procs
+                - If TLB only caches one PT then it must be flushed at process-switch time
+            - Sharing memory and copy-on-write
+            - Page faults are expensive
+                - OS better do a great job managing movement of data between 2nd storage and main memory

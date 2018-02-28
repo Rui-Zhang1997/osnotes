@@ -16,6 +16,27 @@ Invoking the OS
 
 I/O event notification
     Polling
+    Fetch-Decode-Execute
+        Computer as a large, general-purpose calculator
+        All von Neumann computers follow same loop  
+            - Fetch next instruction from memory
+            - Decode
+            - Execute
+        PC counter points to next instruction to run
+        Indirection: fetch contents of a shell "pointed to" by the cell in question
+        Steal an operand bit to signify if an indrection is desired
+        Branch Instructions
+            If content of this cell is [zero, non-zero, etc] set PC to this location
+            jump is unconditional branch
+        Operands and dst can be in
+            Registers only (Sparc, PowerPC, MIPS, Alpha)
+            Registers & 1 memory operand (x86 and clones)
+            Any combination of registers and memory (Vax)
+            Operations 100-1000 times faster when operands are in registers compared to when they are in memory
+            Save instruction space too
+                Only 176-32 registers, not GB of memory
+
+    Operating System virtualized the hardware
 
 Send/receive data to I/O devices
 
@@ -199,6 +220,63 @@ Synchronization
             Otherwise, no effect
 
     SEMAPHORES
+        Synchronized counting variables
+        Formally, a semaphore comprises:
+        An integer value
+        Two operations:
+        P()
+        While value == 0, sleep
+        Decrement value
+        V()
+        Increment value
+        If there are any threads sleeping waiting for value to become non-zero, 
+        wakeup at least 1 thread
+        Using Semaphores
+        Binary semaphores can be used to implement mutual exclusion
+        Initialize counter to 1
+        P == lock acquire
+        V == lock release
+        General semaphores (with the help of a binary semaphore) can 
+        be used in producer-consumer types of synchronization problems
+        Can you figure out how?  Hint: You should learn how to do it.
+        Can you see how to implement semaphores given locks and 
+        condition variables?
+        Can you see how to implement locks and condition variables 
+        given semaphores?
+        Hint: if not, learn how
+    MONITORS
+        Semaphores have a few limitations: unstructured, difficult to 
+        program correctly.  Monitors eliminate these limitations and are 
+        as powerful as semaphores
+        A monitor consists of a software module with one or more 
+        procedures, an initialization sequence, and local data (can only 
+        be accessed by procedures)
+        Only one process can execute within the monitor at any one time 
+        (mutual exclusion)  => entry queue
+        Synchronization within the monitor implemented with condition 
+        variables (wait/signal) => one queue per condition variable 
+    DEADLOCKING
+        - Occurs when multiple parties are competing for exclusive access to multiple resources
+        - Prevention, Avoidance, Detection + Recovery to prevent deadlocks
+        - Conditions for dead lock: mutual exclusion, hold and wait, no preemption, circular wait
+            - Hold and wait - thrd/proc does not release a resource it has locked when it has to wait on another resource
+            - No preemption - thrd/proc never has a resource that it is holding taken away
+        PREVENTION
+            - Design a system w/o one of mutual exclusion, hold/wait, no preemption or circular wait
+        AVOIDANCE
+            - Deny requests that may lead to unsafe states (Banker's)
+            - Expensive to run on all resource requests
+        DETECTION + RECOVERY
+            - Check for circular wait periodically. If found, abort all deadlocked procs
+            - Checking for circular wait is expensive
+        BANKER'S ALGORITHM
+            - Reject resource allocation requests that might leave system in "unsafe state"
+            - State is safe if system can allocate resources to each process in some order and still avoid a deadlock
+                Note that not all unsafe states are deadlock states
+            - Algo is conservative and simply avoids unsafe states altogether
+            - Process must declare the maximum resources it needs
+            - When process requests resources, system checks whether allocation would leave system in an unsafe state
+                - If so, process must wait until some other process releases enough resources
 
 CPU Scheduling
     - Employs policies to determine scheduling (scheduling policies)

@@ -234,7 +234,7 @@ CPU Scheduling
         - RR is one of the worst policies if turnaround is our metric since it stretches one job as long as it can by running it
             in short time slices
         - Any policy that is fair (evenly divides the CPU amongst active processes on a small time scale) will perform poorly on metrics
-            such as turnaround
+            such as turnaround, utilization, response time, deadlines
         - SJF & STCF: Good turnaround, bad response time. RR: Good response time, bad turnaround
 
     - All programs perform I/O

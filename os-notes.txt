@@ -1,12 +1,26 @@
+Definitional
+Functional
+Mastery
+
 Caching
 
 Invoking the OS
+    Interrupts, traps, and exceptions (voluntary/involuntary, user/non-user, how they work, line interrupts)
 
 I/O event notification
+    Polling
 
 Send/receive data to I/O devices
 
 Processes and Threads
+    - Activation record is the currently executing stack frame
+
+    THREAD VS PROCESS CONTEDXT
+        PROCESSES
+            - Separate execution context
+        THREAD
+            - Runs on the same execution context on a different stack
+
     - Each process can have multiple threads
     - Each thread has a private stack
         - Registers are also private
@@ -303,3 +317,25 @@ Memory Management
             been allocated. Does not need large contiguuous chunk of physical memory
         -Inverted PT: Saves lot of space, requires chunk of memory in proportion to size of physical addr space.
             Translation is done through hash table.
+        - Vaddr is divided into:
+            - Page number consisting of 20 bits, page offset of 12 bits
+            - Since page table is paged, page number is further divided into 10bit page number, 10bit page offset
+            +------------+-----------+-------------------------+
+            |       Page number      |       Page offset       |
+            +-----------+------------+-------------------------+
+            |  p1       |    p2      |           d             |
+            +-----------+------------+-------------------------+
+
+            p1 is index of outer page table, p2 is displacement within page to which outer page table points
+        - Translation from virtual to physical memory will take n memory addresses for n-level PT
+        - TLB hit rate 98%, TLB access time of 2ns, memory access of 120ns, and a 2-level PT yield
+            effective_access_time = 0.98(2+120) + 0.02(2+360) = 127ns
+            6% slowdown in memory access time
+
+        - IPT hases virtual page number + pid and the result indexes hash table. Each entry stores first entry to chain,
+            virtual page number of each entry is compared to the referenced page number and on a match corresponding frame
+            number is used
+        - if VM <= physical memory, no problem
+        - if VM > physical memory, part is stored in memory, part is stored on disk
+
+            

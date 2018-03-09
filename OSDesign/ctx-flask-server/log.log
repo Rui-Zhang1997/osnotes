@@ -1,0 +1,246 @@
+{
+    "status": "ok",
+    "totalResults": 20,
+    "articles": [
+        {
+            "source": {
+                "id": null,
+                "name": "Vox.com"
+            },
+            "author": "Emily Stewart",
+            "title": "Trump's trade war will hurt everyone \u2014 the only question is how much",
+            "description": "\u201cI don\u2019t know anybody who thinks that trade wars are something you win,\u201d said former US trade chief Michael Froman.",
+            "url": "https://www.vox.com/policy-and-politics/2018/3/4/17078240/trump-tariffs-trade-war-steel-aluminum",
+            "urlToImage": "https://cdn.vox-cdn.com/thumbor/D_vQAF5h56FSAMTdfRgDe-ti6zI=/0x448:7200x4218/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/10341313/GettyImages_874051394.jpg",
+            "publishedAt": "2018-03-04T19:26:00Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Usnews.com"
+            },
+            "author": null,
+            "title": "Normal Operations to Resume at University After Slayings",
+            "description": null,
+            "url": "https://www.usnews.com/news/us/articles/2018-03-04/police-investigate-why-student-gunned-down-his-parents",
+            "urlToImage": null,
+            "publishedAt": "2018-03-04T19:07:30Z"
+        },
+        {
+            "source": {
+                "id": "abc-news",
+                "name": "ABC News"
+            },
+            "author": "ABC News",
+            "title": "Jared Kushner has 'got to go' if reports about his role in Qatar blockade true: Leading Democrat",
+            "description": "A leading Democratic senator said Sunday that White House senior adviser Jared Kushner needs to leave his post if recent reports are true alleging the Trump son-in-law took a position on certain Middle East political issues in response to his family's busines\u2026",
+            "url": "http://abcnews.go.com/Politics/jared-kushner-reports-role-qatar-blockade-true-leading/story?id=53487405",
+            "urlToImage": "https://s.abcnews.com/images/Blotter/jared-kushner-sh-ml-180302_16x9_992.jpg",
+            "publishedAt": "2018-03-04T19:06:38Z"
+        },
+        {
+            "source": {
+                "id": "nfl-news",
+                "name": "NFL News"
+            },
+            "author": null,
+            "title": "Shaquem Griffin blazes 4.38 unofficial 40-yard dash at Combine",
+            "description": "UCF LB Shaquem Griffin ran a blazing 4.38 unofficial 40-yard dash at the NFL Scouting Combine on Sunday.",
+            "url": "http://www.nfl.com/news/story/0ap3000000919277/article/shaquem-griffin-blazes-438-unofficial-40yard-dash-at-combine",
+            "urlToImage": "http://static.nfl.com/static/content/public/photo/2018/03/04/0ap3000000919321_thumbnail_200_150.jpg",
+            "publishedAt": "2018-03-04T18:53:09Z"
+        },
+        {
+            "source": {
+                "id": "abc-news",
+                "name": "ABC News"
+            },
+            "author": "ABC News",
+            "title": "Charity honoring Philando Castile erases lunch debt for students in his old school district",
+            "description": "Charity honoring man killed by cop erases lunch debt for students in the school district he worked",
+            "url": "http://abcnews.go.com/US/charity-honoring-philando-castile-erases-lunch-debt-students/story?id=53499987",
+            "urlToImage": "https://s.abcnews.com/images/US/philando-castile-1-gty-jt-180304_16x9_992.jpg",
+            "publishedAt": "2018-03-04T18:24:12Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Npr.org"
+            },
+            "author": "Amy Held",
+            "title": "Still No School In W. Va. As Salary Snag Ensures Strike Will Go On",
+            "description": "The state Senate failed to pass the raise teachers are demanding. Now an end date for the strike is unclear as students face their eighth day of no school.",
+            "url": "https://www.npr.org/sections/thetwo-way/2018/03/04/590689844/still-no-school-in-w-va-as-salary-snag-ensures-strike-will-go-on",
+            "urlToImage": "https://media.npr.org/assets/img/2018/03/04/gettyimages-926417100_wide-b2b1b79c059ee3d39c438e65d7f4800d4c179220.jpg?s=1400",
+            "publishedAt": "2018-03-04T18:22:38Z"
+        },
+        {
+            "source": {
+                "id": "reuters",
+                "name": "Reuters"
+            },
+            "author": "Tom Perry",
+            "title": "Syrians flee government advances in eastern Ghouta; Douma convoy approved",
+            "description": "Thousands of civilians have fled advances by Syrian government forces in eastern Ghouta in the last two days, a war monitor and a resident said, as Damascus makes rapid gains against the last major rebel enclave near the capital.",
+            "url": "https://www.reuters.com/article/us-mideast-crisis-syria-ghouta/syrians-flee-government-advances-in-eastern-ghouta-douma-convoy-approved-idUSKBN1GG09E",
+            "urlToImage": "https://s1.reutersmedia.net/resources/r/?m=02&d=20180304&t=2&i=1237310191&w=1200&r=LYNXMPEE23082",
+            "publishedAt": "2018-03-04T18:01:30Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Latimes.com"
+            },
+            "author": "Associated Press",
+            "title": "Serie A postpones matches after Fiorentina captain Davide Astori, 31, found dead",
+            "description": "Fiorentina captain Davide Astori was found dead in his hotel room on Sunday at the age of 31 after a suspected cardiac arrest before an Italian league match.",
+            "url": "http://www.latimes.com/sports/la-sp-serie-a-astori-dead-20180304-story.html",
+            "urlToImage": "http://www.latimes.com/resizer/94NdLoGJNB4on2W-P4ci_sdXQ88=/1200x0/www.trbimg.com/img-5a9c31d4/turbine/la-sp-serie-a-astori-dead-20180304",
+            "publishedAt": "2018-03-04T17:48:45Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Theatlantic.com"
+            },
+            "author": "Krishnadev Calamur",
+            "title": "Nine Notorious Dictators, Nine Shout-Outs From Donald Trump",
+            "description": "The president of the United States continues to heap praise on the world's most reviled rulers.",
+            "url": "https://www.theatlantic.com/international/archive/2018/03/trump-xi-jinping-dictators/554810/",
+            "urlToImage": "https://cdn.theatlantic.com/assets/media/img/mt/2018/03/RTS1J6F4/facebook.jpg?1520178776",
+            "publishedAt": "2018-03-04T16:37:55Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nola.com"
+            },
+            "author": "Emily Lane",
+            "title": "Ben & Jerry's ice cream co-founder arrested Saturday during protest: report",
+            "description": "Ben Cohen was arrested on a charge of violating a noise ordinance during a public demonstration.",
+            "url": "http://www.nola.com/crime/index.ssf/2018/03/ben_and_jerrys_arrest_ben_cohe.html",
+            "urlToImage": "https://i.ytimg.com/vi/wXJiojgucRU/hqdefault.jpg",
+            "publishedAt": "2018-03-04T16:34:00Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nydailynews.com"
+            },
+            "author": "The Associated Press",
+            "title": "Topless activist disrupts Berlusconi vote in Italy",
+            "description": "The woman had the words \u201cBerlusconi, you\u2019ve expired\u201d written in black marker on her topless torso.",
+            "url": "http://www.nydailynews.com/news/world/naked-activist-disrupts-berlusconi-vote-italy-article-1.3854391",
+            "urlToImage": "http://assets.nydailynews.com/polopoly_fs/1.3854388.1520178696!/img/httpImage/image.jpg_gen/derivatives/landscape_1200/aptopix-italy-elections.jpg",
+            "publishedAt": "2018-03-04T16:04:17Z"
+        },
+        {
+            "source": {
+                "id": "the-washington-post",
+                "name": "The Washington Post"
+            },
+            "author": null,
+            "title": "'SNL' usually avoids parodying tragedy. Then Trump said he'd confront a school shooter unarmed.",
+            "description": "\"Okay, nobody is allowed to have a gun. Even whites.\u201d",
+            "url": "https://www.washingtonpost.com/news/arts-and-entertainment/wp/2018/03/04/snl-usually-avoids-parodying-tragedy-then-trump-said-hed-confront-a-school-shooter-unarmed/",
+            "urlToImage": "https://www.washingtonpost.com/resizer/r-0NvU9LTZiMMYQvuUyB_n8shqI=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/CB6II73UK432FNZ2V5KQ3SKWKA.jpg",
+            "publishedAt": "2018-03-04T15:52:59Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nydailynews.com"
+            },
+            "author": "David Boroff",
+            "title": "Falling mirror kills 2-year-old girl shopping for shoes at Payless: 'We are all in a state of shock'",
+            "description": "An outing to buy shoes at Payless ended in tragedy on Friday night when a 2-year-old girl was struck and killed by a falling mirror.",
+            "url": "http://www.nydailynews.com/news/national/mirror-kills-2-year-old-girl-shopping-shoes-payless-article-1.3854370",
+            "urlToImage": "http://assets.nydailynews.com/polopoly_fs/1.3854369.1520177226!/img/httpImage/image.jpg_gen/derivatives/landscape_1200/payless.jpg",
+            "publishedAt": "2018-03-04T15:45:11Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Nypost.com"
+            },
+            "author": "Mark Moore",
+            "title": "Public school teacher reportedly ran a white nationalist podcast",
+            "description": "A Florida teacher is all about the three Rs \u2013 reading, writing and racism, according to a new report. Dayanna Volitich has been secretly hosting a white nationalist podcast called \u201cUnap\u2026",
+            "url": "https://nypost.com/2018/03/04/public-school-teacher-reportedly-ran-a-white-nationalist-podcast/",
+            "urlToImage": "https://thenypost.files.wordpress.com/2018/03/teacher-volitich-feature.jpg?quality=90&strip=all&w=1200",
+            "publishedAt": "2018-03-04T15:40:53Z"
+        },
+        {
+            "source": {
+                "id": "new-york-magazine",
+                "name": "New York Magazine"
+            },
+            "author": "Jonah Shepp",
+            "title": "Are Putin's New Nukes a Real Threat?",
+            "description": "\u201cInvincible\u201d nuclear weapons sound scary, but don\u2019t really change the balance of power.",
+            "url": "http://nymag.com/daily/intelligencer/2018/03/are-putins-new-nukes-a-real-threat.html",
+            "urlToImage": "https://pixel.nymag.com/imgs/daily/intelligencer/2018/03/04/04-putin-national-address.w1200.h630.jpg",
+            "publishedAt": "2018-03-04T14:16:15Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Npr.org"
+            },
+            "author": "Colin Dwyer",
+            "title": "At Gridiron Dinner, Trump Trades Jabs With His 'Opposition Party'",
+            "description": "The ritzy event drew stars from across Washington's media firmament. But all eyes were on President Trump, who offered quips, burns \u2014 and even some news on North Korea. That is, if he wasn't joking.",
+            "url": "https://www.npr.org/sections/thetwo-way/2018/03/04/590660482/at-gridiron-dinner-trump-trades-jabs-with-his-opposition-party",
+            "urlToImage": "https://media.npr.org/assets/img/2018/03/04/gettyimages-923497080_wide-6d8ff5b450fc2a1ce5e985ea6783e30ef9e88d1e.jpg?s=1400",
+            "publishedAt": "2018-03-04T13:15:00Z"
+        },
+        {
+            "source": {
+                "id": "fox-news",
+                "name": "Fox News"
+            },
+            "author": "Fox News",
+            "title": "At Gridiron Dinner, Trump jokes on politics -- but gets serious about North Korea talks",
+            "description": "President Donald Trump on Saturday night traded humorous jabs with a cabal of lawmakers, administration officials, media figures and military officers at the annual Gridiron Dinner in Washington. But the president also used the occasion to deliver some seriou\u2026",
+            "url": "http://www.foxnews.com/politics/2018/03/04/at-gridiron-dinner-trump-jokes-on-politics-but-gets-serious-about-north-korea-talks.html",
+            "urlToImage": "http://a57.foxnews.com/media2.foxnews.com/BrightCove/694940094001/2018/03/04/0/0/694940094001_5744727667001_5744716975001-vs.jpg?ve=1",
+            "publishedAt": "2018-03-04T12:18:18Z"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Latimes.com"
+            },
+            "author": "Glenn Whipp",
+            "title": "Who gets invited to the Oscars?",
+            "description": "Being nominated isn't the only way in: Secrets behind the Oscars' guest list.",
+            "url": "http://www.latimes.com/entertainment/movies/la-et-mn-oscars-tickets-20180228-story.html",
+            "urlToImage": "http://www.latimes.com/resizer/Uum7ZGQ6sIXxV5fULV73m9t_9nU=/1200x0/www.trbimg.com/img-5a9c3636/turbine/la-et-mn-oscars-tickets-20180228",
+            "publishedAt": "2018-03-04T11:00:45Z"
+        },
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Nicole Chavez and Dakin Andone, CNN",
+            "title": "At least 6 killed in deadly storm, thousands still without power",
+            "description": "At least six people have been killed in a ferocious storm that hammered the Northeast with powerful winds, relentless rain and historic flooding.",
+            "url": "https://www.cnn.com/2018/03/03/us/weather-bomb-cyclone/index.html",
+            "urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/180303123705-05-quincy-massachusetts-flooding-030318-super-tease.jpg",
+            "publishedAt": "2018-03-04T06:31:00Z"
+        },
+        {
+            "source": {
+                "id": "the-new-york-times",
+                "name": "The New York Times"
+            },
+            "author": "Mark Mazzetti, David D. Kirkpatrick and Maggie Haberman",
+            "title": "Mueller's Focus on Adviser to Emirates Suggests Broader Investigation",
+            "description": "The special counsel has asked about the role of the adviser, George Nader, in White House policymaking, indicating that he is examining Emirati influence on the Trump administration.",
+            "url": "https://www.nytimes.com/2018/03/03/us/politics/george-nader-mueller-investigation-united-arab-emirates.html",
+            "urlToImage": "https://static01.nyt.com/images/2018/03/04/autossell/04dcinvestigate-1/merlin_134904795_987a2735-4609-4900-b8ba-f1cb3e031718-facebookJumbo.jpg",
+            "publishedAt": "2018-03-04T01:52:36Z"
+        }
+    ]
+}
